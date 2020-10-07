@@ -65,7 +65,8 @@ extension CollectionListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        guard let detailVC = storyboard?.instantiateViewController(identifier: "CollectionDetailViewController") as? CollectionDetailViewController
+        guard let detailVC = storyboard?.instantiateViewController(
+                identifier: CollectionDetailViewController.identifier) as? CollectionDetailViewController
                 else { return }
 
         detailVC.bookInfo = dataSource[indexPath.row].volumeInfo ?? VolumeInfo()
@@ -78,9 +79,12 @@ extension CollectionListViewController: UICollectionViewDataSource {
         self.dataSource.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = self.dataSource[indexPath.row]
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as? ListCollectionViewCell,
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ListCollectionViewCell.identifier,
+                for: indexPath) as? ListCollectionViewCell,
             let volumeInfo = item.volumeInfo else { fatalError("Unable to dequeue cell") }
         
         cell.configureCell(using: volumeInfo)
@@ -90,11 +94,17 @@ extension CollectionListViewController: UICollectionViewDataSource {
 
 extension CollectionListViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout
+                            collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let collectionSize = collectionView.bounds
         if let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout {
-            let padding = flowLayout.minimumInteritemSpacing + flowLayout.sectionInset.left + flowLayout.sectionInset.right + collectionView.contentInset.left +  collectionView.contentInset.right
+            let padding = flowLayout.minimumInteritemSpacing +
+                flowLayout.sectionInset.left +
+                flowLayout.sectionInset.right +
+                collectionView.contentInset.left +
+                collectionView.contentInset.right
             
             let itemWidth = (collectionSize.width - padding) / 2
             return  CGSize(width: itemWidth, height: itemWidth)

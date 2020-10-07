@@ -189,7 +189,6 @@
 		00BCC92C251B13E500ABB0AE /* BookListCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				00BCC92F251B141B00ABB0AE /* Model */,
 				00BCC92E251B141300ABB0AE /* Views */,
 				00BCC92D251B140500ABB0AE /* Controller */,
 			);
@@ -212,13 +211,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		00BCC92F251B141B00ABB0AE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		00BCC93C251B1E2300ABB0AE /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,7 +222,6 @@
 		00BCC946251B527700ABB0AE /* BookDetailsCollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				00BCC949251B52C700ABB0AE /* Model */,
 				00BCC948251B52B800ABB0AE /* Views */,
 				00BCC947251B52B100ABB0AE /* Controller */,
 			);
@@ -253,13 +244,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		00BCC949251B52C700ABB0AE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		00FE43BE2519CBEA0089DDEB /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +262,7 @@
 				007F52E5251478B100A2DD87 /* Sources */,
 				007F52E6251478B100A2DD87 /* Frameworks */,
 				007F52E7251478B100A2DD87 /* Resources */,
+				001EE5F8252E256500FA3731 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -332,6 +317,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		001EE5F8252E256500FA3731 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		007F52E5251478B100A2DD87 /* Sources */ = {

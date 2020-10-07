@@ -15,38 +15,29 @@ import Foundation
 
 class ServiceManager {
     
-    //MARK: Singleton pattern
+    // MARK: Singleton pattern
     static let manager = ServiceManager()
     private init() { }
     
-    //MARK: URL Session to get data from server
+    // MARK: URL Session to get data from server
     func request(withUrl url: URL, completionHandler:@escaping (Any?, Error?) -> Void) {
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             // All 3 (data, response, error) are optional type
             // Response keeps complete server and url-headers related information
             
-            // UI element should be accessed on Main Queue(Thread). That is why we use DispatchQueue.main
-            // UI element should never be accessed on any other thread
-            
-            guard let httpResponse = response as? HTTPURLResponse, (httpResponse.statusCode == 200) , let data = data else {
+            guard let httpResponse = response as? HTTPURLResponse, (
+                    httpResponse.statusCode == 200), let data = data else {
                 DispatchQueue.main.async {
                     completionHandler(nil, error)
                 }
                 return
             }
             
-            do {
-                //let jsonObj = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-                DispatchQueue.main.async {
-                    completionHandler(data, nil)
-                }
+            //let jsonObj = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
+            DispatchQueue.main.async {
+                completionHandler(data, nil)
             }
-//            catch let error {
-//                DispatchQueue.main.async {
-//                    completionHandler(nil, error)
-//                }
-//            }
         }
         task.resume() // In order to call the service
     }

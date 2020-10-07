@@ -13,6 +13,8 @@ class ListTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subtitleLabel: UILabel!
     
+    static let identifier = "ListTableViewCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.itemImageView.layer.cornerRadius = self.itemImageView.frame.height/2

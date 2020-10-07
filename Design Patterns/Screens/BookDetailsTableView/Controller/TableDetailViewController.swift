@@ -19,8 +19,7 @@ class TableDetailViewController: UIViewController {
     @IBOutlet weak var detailImageView: UIImageView!
     
     @IBAction func webButton(_ sender: UIBarButtonItem) {
-        
-        if let urlString = bookInfo.previewLink, let url = URL(string: urlString){
+        if let urlString = bookInfo.previewLink, let url = URL(string: urlString) {
             self.presentSafariVC(with: url)
         }
     }
@@ -77,15 +76,16 @@ class TableDetailViewController: UIViewController {
 }
 
 extension TableDetailViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         keyValueArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = detailTableView.dequeueReusableCell(
+                withIdentifier: DetailTableViewCell.identifier, for: indexPath)
+                as? DetailTableViewCell else { fatalError("Detail cell cannot be dequeued!") }
         
-        guard let cell = detailTableView.dequeueReusableCell(withIdentifier: "DetailTableViewCell", for: indexPath) as? DetailTableViewCell else {
-            fatalError("Detail cell cannot be dequeued!")
-        }
         cell.keyLabel.text = keyValueArray[indexPath.row].key
         cell.valueLabel.text = keyValueArray[indexPath.row].value
         return cell
@@ -93,12 +93,14 @@ extension TableDetailViewController: UITableViewDataSource {
 }
 
 extension TableDetailViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         detailTableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension TableDetailViewController: SFSafariViewControllerDelegate {
+    
     func presentSafariVC(with url: URL) {
         let safariVC = SFSafariViewController(url: url)
         safariVC.delegate = self

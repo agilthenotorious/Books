@@ -72,8 +72,9 @@ extension TableListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let item = self.dataSource[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableViewCell", for: indexPath) as? ListTableViewCell,
-            let volumeInfo = item.volumeInfo else { fatalError("Unable to dequeue cell") }
+        guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell,
+              let volumeInfo = item.volumeInfo else { fatalError("Unable to dequeue cell") }
         
         cell.configureCell(using: volumeInfo)
         return cell

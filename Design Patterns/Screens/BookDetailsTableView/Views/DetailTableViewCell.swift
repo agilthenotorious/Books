@@ -12,6 +12,8 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var keyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
+    static let identifier = "DetailTableViewCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

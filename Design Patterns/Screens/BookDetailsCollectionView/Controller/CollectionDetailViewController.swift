@@ -18,6 +18,7 @@ class CollectionDetailViewController: UIViewController {
     }
     @IBOutlet weak var detailImageView: UIImageView!
     
+    static let identifier = "CollectionDetailViewController"
     var bookInfo = VolumeInfo()
     var keyValueArray = [KeyValueStruct]()
     
@@ -70,14 +71,17 @@ class CollectionDetailViewController: UIViewController {
 }
 
 extension CollectionDetailViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         keyValueArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = detailCollectionView.dequeueReusableCell(withReuseIdentifier: DetailCollectionViewCell.identifier, for: indexPath) as? DetailCollectionViewCell else {
-            fatalError("Detail cell cannot be dequeued!")
-        }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt
+                            indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = detailCollectionView.dequeueReusableCell(
+                withReuseIdentifier: DetailCollectionViewCell.identifier, for: indexPath)
+                as? DetailCollectionViewCell else { fatalError("Detail cell cannot be dequeued!") }
+        
         cell.keyLabel.text = keyValueArray[indexPath.row].key
         cell.valueLabel.text = keyValueArray[indexPath.row].value
         return cell
@@ -85,12 +89,14 @@ extension CollectionDetailViewController: UICollectionViewDataSource {
 }
 
 extension CollectionDetailViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         detailCollectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 
 extension CollectionDetailViewController: SFSafariViewControllerDelegate {
+    
     func presentSafariVC(with url: URL) {
         let safariVC = SFSafariViewController(url: url)
         safariVC.delegate = self
@@ -99,13 +105,14 @@ extension CollectionDetailViewController: SFSafariViewControllerDelegate {
     
     @objc func viewOnline() {
         if let urlString = bookInfo.previewLink,
-            let url = URL(string: urlString){
+            let url = URL(string: urlString) {
             self.presentSafariVC(with: url)
         }
     }
     
     func viewInSafari() {
-        let webButton = UIBarButtonItem(title: "Web View", style: .plain, target: self, action: #selector(self.viewOnline))
+        let webButton = UIBarButtonItem(title: "Web View", style: .plain, target: self,
+                                        action: #selector(self.viewOnline))
         self.navigationItem.rightBarButtonItem = webButton
     }
 }
