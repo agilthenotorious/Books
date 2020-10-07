@@ -7,5 +7,5 @@ Simple demonstration of how TableView and CollectionView work using Google Books
 ## GIF
 
 <p align="center">
-  <img src="https://github.com/agilthenotorius/Books/blob/master/Design%20Patterns/GIFs/bookTableView.gif" height="600" />
+  <img src="https://github.com/agilthenotorius/Books/blob/main/GIFs/bookTableView.gif" height="600" />
 </p>
